@@ -67,5 +67,16 @@ int main(){
 
     double (*p6)(int, double) = multiply;
     std::cout << "The product is: " << p6(3, 4.5) << std::endl; // 输出13.5
+    std::cout << "-------------------------------------------" << std::endl; // 分割符号
+
+    int b = 100;
+    int c = 200;
+    const int *p7 = &b;         // 常量指针 *p不变
+    int * const p8 = &b;        // 指针常量 p不变
+    cout << *p7 << endl;
+    p7 = &c;
+    *p8 = c;
+    cout << *p7 << endl;
+    cout << *p8 << endl;
     return 0;
 }
