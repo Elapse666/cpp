@@ -185,13 +185,41 @@ void func1(twotwo::string s)
 void func2(twotwo::string& s)
 {}
  
- 
+void Func(int& x) {	cout << "左值引用" << endl; }
+
+void Func(const int& x) { cout << "const左值引用" << endl; }
+
+void Func(int&& x) { cout << "右值引用" << endl; }
+
+void Func(const int&& x) { cout << "const右值引用" << endl; }
+
+template<typename T>
+void f(T&& t)  // 万能引用
+{
+	Func(t);  // 根据参数t的类型去匹配合适的重载函数
+}
+
+
+
 int main()
 {
 	//twotwo::to_string(1234);
 	twotwo::string ret1;
-	ret1 = twotwo::to_string(1234);
- 
+	ret1 = twotwo::to_string(1234);			// string& operator=(string&& s) -- 移动赋值
+	twotwo::string ret2 = ret1;				// 左值， 深拷贝
+	twotwo::string ret3 = std::move(ret1);	// 右值， 移动构造
+
+	int a = 4;  // 左值
+	f(a);
+	
+	const int b = 8;  // const左值
+	f(b);
+	
+	f(10); // 10是右值
+	
+	const int c = 13;
+	f(std::move(c));  // const左值被move后变成const右值
+
 	return 0;
 }
 

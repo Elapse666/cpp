@@ -990,12 +990,12 @@ public:
     }
 
     // 拷贝构造函数
-    Person(const Person& other) {
+    Person(const Person& other) {                   // 注意拷贝构造函数的参数是 const左值引用， 接收左值或右值
         age = other.age;
     }
 
     // 移动构造函数
-    Person(Person&& other) noexcept {               // Person&& other 是右值引用
+    Person(Person&& other) noexcept {               // Person&& other 是右值引用或者move的左值
         age = other.age;
         other.age = 0;
     }
@@ -1010,6 +1010,8 @@ public:
     }
 };
 
+
+
 int main() {
     // 使用默认构造函数创建对象
     Person p1;
@@ -1023,7 +1025,7 @@ int main() {
     Person p3(p2);
     p3.print();  // 输出：Age: 25
 
-    // 使用移动构造函数创建对象
+    // 使用移动构造函数创建对象, 当传来的参数是右值时，虽然拷贝构造函数可以接收，但是编译器会认为移动构造函数更加匹配，就会调用移动构造函数。
     Person p4(move(p3));            // 右值应用的对象想要放入左值， 必须使用std::move, 即右值引用可以引用move以后的左值
     p4.print();  // 输出：Age: 25
     p3.print();  // 输出：Age: 0

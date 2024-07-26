@@ -66,6 +66,26 @@ private:
 	int _day;
 };
 
+class New_Person{
+public:
+    New_Person(int year = 2022, int month = 8, int day = 20)
+        :new_year(year)
+        ,new_month(month)
+		,new_day(day)
+    {
+        
+    }
+
+    // 移动构造函数和拷贝构造函数会被默认生成
+
+    void print(){
+        cout << "Date year = " << new_year << " month = " << new_month << " day = " << new_day << " by print" << endl;
+    }
+private:
+    int new_year;
+	int new_month;
+	int new_day;
+};
 
 int main() {
     // 使用默认构造函数创建对象
@@ -96,5 +116,18 @@ int main() {
     d2.print();
     d3.print();
 
+    cout << "---------------------------------------------------------------" << endl;
+    New_Person n1;
+    New_Person n2(2024, 7, 26);
+    New_Person n3 = n1;
+    New_Person n4(n1);          // n3,n4都为拷贝构造函数
+    New_Person n5(move(n1));
+
+    n1.print();
+    n2.print();
+    // n3.print();
+    n4.print();
+    n5.print();
+    n1.print();
     return 0;
 }
