@@ -1056,7 +1056,7 @@ void func(MyClass obj) {
 
 int main() {
     MyClass obj1(10);  // 直接构造一个 MyClass 对象
-    MyClass obj2 = 20;  // 错误，不允许隐式转换
+    MyClass obj2 = 20;  // 错误，不允许隐式转换     隐式转换会导致多一轮拷贝构造
     MyClass obj3 = MyClass(30);  // OK，显式转换
     MyClass obj4 = static_cast<MyClass>(40);  // OK，强制类型转换
 
